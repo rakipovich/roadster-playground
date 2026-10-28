@@ -1,0 +1,205 @@
+.drive-mode.playing footer{display:none}
+.drive-mode.playing #look-stick-wrap{bottom:max(20px,env(safe-area-inset-bottom))}
+.drive-mode.playing #view-control{bottom:calc(max(20px,env(safe-area-inset-bottom)) + 110px)}
+.drive-mode #look-stick{width:100px;height:100px}
+.drive-mode #view-control{left:calc(max(16px,env(safe-area-inset-left)) + 22px)}
+#driving-ui{position:fixed;inset:0;z-index:4;pointer-events:none}
+#driving-ui button{pointer-events:auto;width:58px;height:58px;display:grid;place-items:center;border:1px solid #ffffff65;border-radius:50%;color:#fff;background:#14203050;backdrop-filter:blur(8px);font-size:26px;touch-action:none;user-select:none;-webkit-user-select:none}
+#driving-ui button.held{background:#ffffff55;border-color:white}
+.drive-pedals{position:absolute;right:max(16px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));display:grid;gap:10px}
+#driving-ui #drive-gas{width:72px;height:72px;font-size:36px}.drive-pedals button{justify-self:center}
+#drive-boost{position:relative}#drive-boost svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.5}#drive-fuel{position:absolute;bottom:7px;width:25px;height:3px;accent-color:#cbddeb}
+.drive-actions{position:absolute;bottom:max(22px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;gap:8px}#driving-ui .drive-actions button{width:48px;height:48px;font-size:23px}
+.drive-status{position:absolute;top:max(18px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:grid;grid-template-columns:auto auto;align-items:baseline;gap:0 5px;text-shadow:0 1px 5px #000;color:#fff;white-space:nowrap}#drive-speed{font-size:24px}.drive-status span{font-size:10px}#drive-state{font-size:9px;grid-column:1/3;text-align:center;letter-spacing:.06em}
+#drive-hint{position:absolute;bottom:250px;left:22px;right:22px;text-align:center;font-size:12px;line-height:1.6;text-shadow:0 1px 6px #000;pointer-events:none}
+@media(max-height:560px){.drive-pedals{grid-template-columns:58px 72px;align-items:end}.drive-pedals #drive-boost{grid-column:2;grid-row:1}.drive-pedals #drive-gas{grid-column:2;grid-row:2}.drive-pedals #drive-brake{grid-column:1;grid-row:2}#drive-hint{bottom:80px;left:135px;right:180px}}
+@media(max-width:360px){.drive-mode #look-stick{width:84px;height:84px}.drive-mode #view-control{left:calc(max(16px,env(safe-area-inset-left)) + 14px)}.drive-mode.playing #view-control{bottom:calc(max(20px,env(safe-area-inset-bottom)) + 94px)}}
+/* V29: keep three simultaneous contacts independent; allow a thumb to slide gas→jet. */
+.drive-mode{overscroll-behavior:none;-webkit-touch-callout:none}
+.drive-mode.playing #view,.drive-mode #settings-open,#driving-ui button{backdrop-filter:none;-webkit-backdrop-filter:none;background:#11182030}
+#drive-lens{position:fixed;z-index:5;left:74px;top:max(10px,env(safe-area-inset-top));width:48px;height:48px;padding:0;border:1px solid #ffffff40;border-radius:50%;background:#11182030;color:white;font-size:13px;touch-action:manipulation}
+.drive-mode:not(.playing) #drive-lens{display:none}
+#driving-ui .drive-pedals{gap:8px}
+#driving-ui #drive-boost{width:64px;height:64px}
+#driving-ui #drive-gas{width:76px;height:76px}
+.drive-mode.playing #drive-hint{bottom:252px}
+@media(max-height:560px){#drive-lens{top:4px}.drive-mode.playing #drive-hint{bottom:90px}.drive-pedals{grid-template-columns:58px 76px}}
+/* V30: boarding has no steering controls; touch targets occupy separate lanes. */
+.drive-mode:not(.playing) #look-stick-wrap,.drive-mode:not(.playing) #view-control{display:none!important}
+.drive-mode .boarding{left:50%;right:auto;transform:translateX(-50%);bottom:max(20px,env(safe-area-inset-bottom));width:min(300px,calc(100vw - 48px));max-width:none}
+.drive-mode .boarding p{position:static;max-width:none;margin:0 0 12px;text-align:center;font-size:12px}
+#rotate-hint{display:none;position:fixed;z-index:4;top:calc(max(10px,env(safe-area-inset-top)) + 60px);left:24px;right:24px;text-align:center;font-size:11px;line-height:1.4;color:#eee;text-shadow:0 1px 4px #000;pointer-events:none}
+#rotate-hint span{font-size:19px;vertical-align:middle;margin-right:4px}
+@media(orientation:portrait){.drive-mode.boarding-active #rotate-hint{display:block}.drive-mode .boarding{bottom:max(28px,env(safe-area-inset-bottom))}}
+@media(max-height:560px){.drive-mode .boarding{width:250px}.drive-mode .boarding .primary{min-height:52px}}
+@media(max-width:360px){.drive-mode .drive-status{left:52%;top:16px}.drive-mode #drive-speed{font-size:20px}}
+#rotate-hint svg{width:30px;height:30px;vertical-align:middle;margin-right:5px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+/* Keep the lens button clear of the logo beside an iPhone's landscape safe area. */
+.drive-mode #drive-lens{left:calc(max(12px,env(safe-area-inset-left)) + 62px)}
+/* Local V33: follow camera + cached cabin recorder, controls keep their existing lanes. */
+.drive-mode.chase-view #drive-lens,.drive-mode #rotate-hint{display:none!important}
+#cabin-feed{position:fixed;z-index:3;top:70px;right:max(12px,env(safe-area-inset-right));width:168px;aspect-ratio:16/9;border:1px solid #ffffff70;border-radius:0;pointer-events:none;overflow:hidden;box-shadow:0 2px 12px #0005}
+#cabin-feed button{pointer-events:auto;touch-action:manipulation;border:0;background:transparent;color:white;padding:0}
+#cabin-open{position:absolute;inset:0;width:100%;height:100%;text-align:left}
+#cabin-open span{position:absolute;top:6px;left:8px;font-size:9px;letter-spacing:.08em;text-shadow:0 1px 4px #000}
+#cabin-collapse{position:absolute;right:0;top:0;width:44px;height:44px;font-size:24px;text-shadow:0 1px 4px #000}
+#cabin-feed.collapsed{width:44px;height:44px;aspect-ratio:auto;border-radius:50%;background:#11182055}
+#cabin-feed.collapsed #cabin-open{display:none}
+@media(orientation:landscape){#cabin-feed{top:10px;right:calc(max(12px,env(safe-area-inset-right)) + 60px);width:160px}}
+@media(max-width:360px){#cabin-feed{width:144px}}
+#cabin-open{width:calc(100% - 44px)}
+@media(orientation:landscape) and (max-width:600px){#cabin-feed{width:132px}}
+
+#drive-score{grid-column:1/3;text-align:center;font-size:12px;color:#f4dc97;font-variant-numeric:tabular-nums;pointer-events:none}
+/* Mobile HUD: score first, generous thumb targets, distinct pedal labels. */
+.pedal-label{display:none}
+#drive-score.score-landed{color:#a7ffbf}#drive-score.score-crash{color:#ff9c96}
+@media(pointer:coarse),(max-width:950px){
+ .drive-mode .drive-status{top:max(12px,env(safe-area-inset-top));left:50%;gap:2px 5px;padding:6px 12px;border-radius:16px;background:#10172280}
+ .drive-mode #drive-score{grid-row:1;font-size:26px;font-weight:750;line-height:1.15}
+ .drive-mode #drive-state{grid-row:2;font-size:12px;font-weight:650;max-width:220px;overflow:hidden;text-overflow:ellipsis}
+ .drive-mode #drive-speed{font-size:18px;text-align:right}.drive-status span{font-size:11px}
+ .drive-mode #look-stick{width:112px;height:112px}
+ .drive-mode.playing #view-control{bottom:calc(max(20px,env(safe-area-inset-bottom)) + 124px)}
+ #driving-ui button{width:68px;height:68px;position:relative}
+ #driving-ui #drive-gas{width:88px;height:88px;padding-bottom:16px}
+ #driving-ui #drive-boost{width:76px;height:76px;padding-bottom:14px}
+ #driving-ui #drive-brake{padding-bottom:14px}
+ #driving-ui .drive-actions button{width:54px;height:54px}
+ .pedal-label{display:block;position:absolute;bottom:9px;font-size:11px;font-weight:700;letter-spacing:.03em;line-height:1}
+ #drive-boost .pedal-label{bottom:15px}#drive-fuel{width:34px;bottom:7px}
+ #cabin-feed{top:112px}
+}
+@media(max-height:560px) and (max-width:950px){
+ .drive-mode .drive-status{top:8px;left:42%;padding:5px 10px}
+ #driving-ui .drive-pedals{grid-template-columns:68px 88px;gap:8px}
+ #cabin-feed{top:10px}
+ .drive-mode #drive-state{max-width:190px}
+}
+@media(max-width:380px){
+ .drive-mode #drive-score{font-size:23px}.drive-mode #look-stick{width:100px;height:100px}
+ .drive-mode.playing #view-control{bottom:calc(max(20px,env(safe-area-inset-bottom)) + 112px)}
+ #driving-ui .drive-actions{gap:4px}#driving-ui .drive-actions button{width:44px;height:48px}
+}
+@media(max-width:360px){.drive-mode #look-stick{width:96px;height:96px}}
+
+#driving-ui #drive-grip{position:absolute;left:calc(max(16px,env(safe-area-inset-left)) + 24px);bottom:calc(max(20px,env(safe-area-inset-bottom)) + 212px);width:64px;height:64px;padding-bottom:14px}
+#drive-grip small{position:absolute;bottom:9px;font-size:9px}#driving-ui #drive-grip[aria-pressed="true"]{background:#d2e6ed55;border:2px solid #fff}
+
+/* Grip latches once: slide the gas thumb diagonally onto it without releasing gas. */
+#driving-ui #drive-grip{left:auto;right:calc(max(16px,env(safe-area-inset-right)) + 100px);bottom:calc(max(20px,env(safe-area-inset-bottom)) + 176px)}
+@media(max-height:560px){#driving-ui #drive-grip{bottom:calc(max(20px,env(safe-area-inset-bottom)) + 100px)}}
+
+/* Cabin monitor: rounded image mask is matched in cabin-feed.js. */
+#cabin-feed{border:1px solid #ffffff45;border-radius:14px;box-shadow:0 5px 18px #0005,inset 0 0 0 1px #ffffff0a;isolation:isolate}
+#cabin-feed::before{content:"";position:absolute;inset:0 0 auto;height:32px;background:linear-gradient(#0b111cb3,transparent);pointer-events:none;border-radius:13px 13px 0 0}
+#cabin-open{width:100%}
+#cabin-open span{top:9px;left:10px;font-size:8px;font-weight:650;letter-spacing:.13em;color:#edf2f7;text-shadow:0 1px 4px #000a}
+#cabin-open span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:#e1e9ef;margin-right:6px;vertical-align:2px}
+#cabin-open::after{content:"↗";position:absolute;right:9px;bottom:6px;font-size:13px;color:#fffd;text-shadow:0 1px 4px #000}
+#cabin-collapse{z-index:2;width:44px;height:44px;font-size:20px;padding-bottom:13px!important;color:#e1e9ef!important}
+#cabin-feed.collapsed{border-radius:14px;background:#111b2bd9;box-shadow:0 3px 12px #0004}
+#cabin-feed.collapsed::before{display:none}#cabin-feed.collapsed #cabin-collapse{padding-bottom:0!important}
+@media(pointer:coarse),(max-width:950px){#cabin-feed:not(.collapsed){width:184px}}
+@media(orientation:landscape){#cabin-feed:not(.collapsed){width:172px}}
+@media(max-width:360px),(orientation:landscape) and (max-width:600px){#cabin-feed:not(.collapsed){width:148px}}
+
+#drive-grip-fuel{position:absolute;bottom:5px;width:25px;height:3px;accent-color:#cbddeb}
+#driving-ui #drive-grip.depleted{border-style:dashed;opacity:.6}
+
+/* Compact session controls; all longer explanations remain in the menu. */
+#drive-clock{grid-column:1/3;text-align:center;font-size:20px;font-variant-numeric:tabular-nums;order:-1;font-weight:600}#drive-clock.last-seconds{color:#ffc08a}
+.run-choices{display:flex;gap:8px;margin-bottom:12px}.run-choices button{flex:1;min-height:44px;border:1px solid #ffffff50;background:#121a2455;border-radius:12px;font-size:11px;color:white}.run-choices button[aria-pressed="true"]{background:#ffffff25;border-color:white}
+#run-result{width:min(340px,calc(100vw - 40px));padding:26px;border:1px solid #ffffff30;border-radius:22px;background:#151d29ed;color:white;text-align:center;box-sizing:border-box}#run-result::backdrop{background:#070c1450}#run-result h2{font-size:23px;margin:10px 0}#run-result .run-eyebrow{font-size:11px;letter-spacing:.18em;opacity:.6}#run-final-score{display:block;font-size:44px;margin:15px 0}#run-record{font-size:13px;opacity:.7}#run-result button{display:block;width:100%;min-height:48px;border:1px solid #ffffff40;border-radius:12px;background:#ffffff12;color:white;margin-top:10px;font-size:15px}#run-result #run-again{background:#e9edf0;color:#121820}
+@media(max-height:560px){#run-result{padding:14px 24px}#run-result h2{margin:4px 0;font-size:20px}#run-final-score{font-size:32px;margin:5px 0}#run-record{margin:5px 0}#run-result .run-eyebrow{margin:4px 0}#run-result button{min-height:44px;margin-top:6px}}
+/* Three rows keep the timer above the cabin monitor on portrait phones. */
+.drive-mode .drive-status{grid-template-columns:1fr auto auto;column-gap:4px;max-width:190px}
+.drive-mode #drive-score{grid-row:1;grid-column:1/4}
+.drive-mode #drive-clock{grid-row:2;grid-column:1;text-align:left;font-size:18px}
+.drive-mode #drive-speed{grid-row:2;grid-column:2;font-size:13px}
+.drive-mode .drive-status>span{grid-row:2;grid-column:3;font-size:9px}
+.drive-mode #drive-state{grid-row:3;grid-column:1/4;max-width:170px;font-size:10px}
+
+#settings .music-volume{grid-column:1/-1;display:grid;gap:0;padding:8px 12px 0;border:1px solid #ffffff20;border-radius:14px;font-size:12px;color:#e4e8ee}
+#settings .music-volume input{width:100%;min-height:44px;margin:0;accent-color:#d5e4ee;touch-action:pan-y}
+/* One icon family; labels stay only on the four less obvious driving actions. */
+.control-icon{width:24px;height:24px;flex:none;pointer-events:none;display:block}
+#driving-ui button .control-icon{width:28px;height:28px}
+#driving-ui #drive-boost .control-icon{width:28px;height:28px;stroke-width:1.7}
+#music-quick,#help-quick{position:fixed;z-index:7;top:max(10px,env(safe-area-inset-top));width:44px;height:44px;display:grid;place-items:center;padding:0;border:1px solid #ffffff38;border-radius:50%;color:#f2f4f6;background:#11182045;touch-action:manipulation}
+#music-quick{right:calc(max(12px,env(safe-area-inset-right)) + 56px)}#help-quick{left:calc(max(12px,env(safe-area-inset-left)) + 48px)}
+#music-quick[aria-pressed="true"]{background:#e5eef02b;border-color:#ffffff90}
+@media(orientation:landscape){#music-quick{right:auto;left:72px}#help-quick{left:124px}}
+#settings .settings-grid button{display:flex;align-items:center;gap:9px}#settings .control-icon{width:21px;height:21px}
+#control-help{box-sizing:border-box;width:min(520px,calc(100vw - 24px));max-height:calc(100dvh - 32px);overflow:auto;padding:20px;border:1px solid #ffffff30;border-radius:22px;background:#151d29f5;color:#f0f3f7;box-shadow:0 20px 80px #0006}
+#control-help::backdrop{background:#070c1470}
+.help-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}.help-heading span{font-size:10px;letter-spacing:.13em;color:#aab7c6}.help-heading h2{font-size:24px;margin:5px 0}
+#control-help #help-close{width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid #ffffff30;border-radius:50%;background:transparent;color:inherit}
+.help-rows{display:grid;gap:2px}.help-row{display:flex;align-items:flex-start;gap:14px;padding:10px 0;border-bottom:1px solid #ffffff12}.help-row>.control-icon{margin-top:2px;width:25px;height:25px;color:#d5e3ec}.help-row strong{font-size:14px}.help-row p{font-size:12px;line-height:1.5;color:#b8c4d0;margin:3px 0 0}.help-rules{font-size:12px;color:#b8c4d0;line-height:1.55;margin:14px 0}
+#control-help #help-done{display:block;width:100%;min-height:48px;border:1px solid #ffffff40;border-radius:12px;background:#e9edf0;color:#121820;font-size:15px;position:sticky;bottom:0;box-shadow:0 -8px 16px #151d29}
+@media(orientation:landscape) and (max-height:560px){#control-help{width:min(680px,calc(100vw - 32px));padding:14px 20px}.help-rows{grid-template-columns:1fr 1fr;column-gap:20px}.help-heading h2{font-size:20px}}
+
+.drive-mode .settings-help{display:none}
+
+/* Pedal silhouettes carry meaning; visible labels live only in the help sheet. */
+#driving-ui #drive-gas,#driving-ui #drive-brake{padding:0}
+#driving-ui #drive-boost,#driving-ui #drive-grip{padding:0 0 6px}
+#driving-ui #drive-gas .control-icon{width:40px;height:40px;stroke-width:1.5}
+#driving-ui #drive-brake .control-icon{width:34px;height:34px;stroke-width:1.6}
+#driving-ui button.held .control-icon{transform:scale(.91)}
+.drive-mode #stick-label{display:none}
+
+/* V53: cabin left, unobstructed score right, one compact utility strip. */
+.drive-mode.playing .wordmark{display:none}
+.drive-mode #cabin-feed{left:max(12px,env(safe-area-inset-left));right:auto;top:max(12px,env(safe-area-inset-top))}
+.drive-mode .drive-status{left:auto;right:max(16px,env(safe-area-inset-right));top:calc(max(12px,env(safe-area-inset-top)) + 52px);transform:none;padding:0;background:none;border:0;border-radius:0;max-width:180px;text-align:right;gap:3px 5px}
+.drive-mode #drive-score{text-align:right;font-size:28px;line-height:1.1}
+.drive-mode #drive-state{text-align:right;max-width:180px}
+.drive-mode #drive-clock{text-align:right}
+.drive-mode #music-quick{left:auto;right:calc(max(12px,env(safe-area-inset-right)) + 52px)}
+.drive-mode #help-quick{left:auto;right:calc(max(12px,env(safe-area-inset-right)) + 104px)}
+.drive-mode.playing #drive-reset{display:none}
+.drive-mode #driving-ui #drive-grip{left:auto;right:calc(max(16px,env(safe-area-inset-right)) + 100px);bottom:calc(max(20px,env(safe-area-inset-bottom)) + 96px)}
+#music-quick[aria-busy="true"]::after{content:"";position:absolute;inset:3px;border:2px solid transparent;border-top-color:#edf4fa;border-radius:50%;animation:music-loading .8s linear infinite}
+#music-quick[data-state="error"]{border-style:dashed;opacity:.65}
+@keyframes music-loading{to{transform:rotate(360deg)}}
+@media(max-width:380px){.drive-mode #cabin-feed:not(.collapsed){width:144px}.drive-mode .drive-status{max-width:160px}.drive-mode #drive-score{font-size:25px}}
+@media(orientation:landscape) and (max-height:560px){.drive-mode .drive-status{top:calc(max(10px,env(safe-area-inset-top)) + 48px)}.drive-mode #drive-score{font-size:26px}}
+.drive-mode #settings-open{position:fixed;top:max(10px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));width:44px;height:44px;z-index:7}
+/* Keep swipes and long presses in the game, not in browser text selection. */
+body.drive-mode,body.drive-mode *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-user-drag:none}
+body.drive-mode input,body.drive-mode textarea{touch-action:manipulation}
+body.drive-mode canvas{touch-action:none}
+
+.run-objective{font-size:13px;line-height:1.45;max-width:300px;opacity:.75;margin:0 0 12px}.run-objective:empty{display:none}
+
+#boost-reload,#grip-reload{position:absolute;top:7px;right:9px;font-size:12px;line-height:16px;color:#d6d9df;pointer-events:none}#drive-boost.depleted{opacity:.55}
+
+#explore-count{font-size:13px;letter-spacing:.06em;opacity:.7}#explore-count:empty{display:none}
+
+.drive-mode #explore-count{grid-column:1/4;grid-row:4;text-align:right}
+.drive-mode .run-choices,.drive-mode .run-choices button{pointer-events:auto;touch-action:manipulation}
+#author-panel{width:min(370px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;padding:26px;border:1px solid #ffffff25;border-radius:20px;background:#151a22f5;color:#e9edf2;box-sizing:border-box}#author-panel::backdrop{background:#03070d88}#author-panel .author-close{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;background:none;color:inherit;font-size:28px}.author-eyebrow{font-size:13px;letter-spacing:.08em;opacity:.7;margin:10px 0}#author-title{font-size:25px;line-height:1.15;margin:12px 0}.author-copy{font-size:14px;line-height:1.55;color:#b7c0cc}#author-panel a,#author-panel .author-back{display:flex;align-items:center;justify-content:center;min-height:48px;margin-top:10px;padding:8px 12px;border-radius:12px;border:1px solid #ffffff30;font:inherit;font-size:14px;text-decoration:none;color:inherit;box-sizing:border-box;width:100%;background:none}#author-panel .author-primary{background:#e3e6eb;color:#151a22}#author-panel .author-back{border:0;opacity:.65}#explore-reward{grid-row:5;grid-column:1/4;min-height:44px;font-size:12px;color:#d8dee7;border:0;background:none;text-align:right;pointer-events:auto}#explore-reward[hidden]{display:none}
+
+/* A quiet title card; the vehicle has its own unobstructed space. */
+.drive-mode #welcome{width:100%;padding:0 max(28px,5vw) max(28px,5vh);justify-content:flex-end;background:linear-gradient(0deg,#080b10 0%,#080b10eb 24%,#080b1050 56%,transparent 74%);text-shadow:none;overflow:auto}
+.drive-mode #welcome>*{max-width:440px}
+.drive-mode #welcome .eyebrow{font-size:10px;letter-spacing:.19em;color:#b3b7bd;display:flex;align-items:center;gap:12px}
+.drive-mode #welcome .eyebrow:before{content:"";width:24px;height:2px;background:#b44339}
+.drive-mode #welcome h1{font-size:clamp(42px,10vw,72px);font-weight:500;line-height:.94;letter-spacing:-.055em;margin:18px 0}
+.drive-mode #welcome h1 em{color:#c7cbd0}
+.drive-mode #welcome p{font-size:13px;line-height:1.55;color:#aeb4bd;margin:0 0 22px;max-width:380px}
+.drive-mode #welcome #start{width:100%;min-height:54px;padding:14px 22px;border:1px solid #b8bdc450;border-radius:8px;background:#f0f1ef;color:#11151a;text-align:left;font-size:15px;font-weight:500;text-shadow:none}
+.drive-mode #welcome #start:disabled{background:#ffffff12;color:#b0b5bb}
+.drive-mode #welcome .loading{max-width:440px;width:100%;margin-top:18px}
+.drive-mode #welcome #load-progress{height:1px;background:#ffffff18}
+.drive-mode #welcome #load-progress::-webkit-progress-value{background:#a6483e}
+.drive-mode #welcome #load-status{font-size:10px;color:#8f969e;margin-top:9px}
+.drive-mode #welcome #load-detail{font-size:10px;color:#8f969e;margin-top:6px;letter-spacing:.015em}
+.drive-mode #welcome .look-hint{display:none}
+@media(min-aspect-ratio:1/1){.drive-mode #welcome{justify-content:center;background:linear-gradient(90deg,#080b10f5,#080b10c0 35%,transparent 70%);padding-top:90px;padding-bottom:35px}.drive-mode #welcome>*{max-width:min(440px,43vw)}.drive-mode #welcome h1{font-size:clamp(40px,6vw,78px)}}
+@media(max-height:560px) and (min-aspect-ratio:1/1){.drive-mode #welcome{padding:66px 28px 18px}.drive-mode #welcome h1{font-size:40px;margin:10px 0}.drive-mode #welcome p{display:block;font-size:11px;margin:0 0 12px}.drive-mode #welcome #start{min-height:44px;padding:10px 18px}.drive-mode #welcome .loading{margin-top:10px}.drive-mode #welcome #load-status{display:none}.drive-mode #welcome #load-detail{display:block;font-size:9px}}
+
+.drive-mode:has(#welcome:not([hidden])) #music-quick,.drive-mode:has(#welcome:not([hidden])) #help-quick{display:none}
+
+@media(min-aspect-ratio:1/1){.drive-mode #welcome .loading{max-width:min(440px,43vw)}}

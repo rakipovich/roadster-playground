@@ -1,0 +1,7 @@
+import assert from 'node:assert/strict';import {Scene,Quaternion,Vector3} from 'three';import {initPhysics,createDrivingWorld} from '../src/driving-physics.js';import {wallRides} from '../src/wall-rides.js';import {parkDemoInput} from '../src/park-demo.js';await initPhysics();
+for(const enabled of [true,false]){const sim=createDrivingWorld({spawn:{x:-20,y:10,z:-90}});wallRides(new Scene(),sim.world,sim.RAPIER);sim.body.setRotation(new Quaternion().setFromAxisAngle(new Vector3(1,0,0),Math.PI/2),true);let active=0;
+for(let i=0;i<360;i++){const s=sim.step({adhesion:enabled&&i>12,throttle:.35});if(s.adhering)active++;}
+if(enabled){assert.ok(active>300);assert.ok(sim.body.translation().x>-15);assert.ok(sim.body.translation().y>9,'No sideways fall with grip');}else assert.ok(sim.body.translation().y<2,'Without grip gravity pulls the car off');console.log({enabled,position:sim.body.translation()});sim.world.free();}
+const sim=createDrivingWorld({spawn:{x:-113,y:.05,z:-90}});wallRides(new Scene(),sim.world,sim.RAPIER);let vertical=0,detached=false;
+for(let i=0;i<1920;i++){const t=i/120,s=sim.step(parkDemoInput('wall',t,sim.body));if(s.adhering&&Math.abs(s.upY)<.1&&sim.body.translation().y>8)vertical++;if(t>11.2&&s.boosting&&!s.adhering&&!s.grounded)detached=true;}
+assert.ok(vertical>180,'Drive vertically banked for >1.5 seconds');assert.ok(detached,'Jets release from the vertical wall');console.log({verticalSeconds:vertical/120,detached});sim.world.free();

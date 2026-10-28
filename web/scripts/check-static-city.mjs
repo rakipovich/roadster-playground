@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import * as THREE from 'three';
+import {batchStaticCity} from '../src/static-city.js';
+const root=new THREE.Group();root.position.set(31,4,-22);root.rotation.y=.2;
+const material=new THREE.MeshStandardMaterial();material.name='City wall 0';
+for(let i=0;i<4;i++){const parent=new THREE.Group();parent.position.set(i*3,0,0);const mesh=new THREE.Mesh(new THREE.BoxGeometry(),material);mesh.position.set(1,2,1);parent.add(mesh);root.add(parent);}
+const transparent=new THREE.Mesh(new THREE.BoxGeometry(),material.clone());transparent.material.transparent=true;root.add(transparent);
+const before=new THREE.Box3().setFromObject(root,true);root.updateWorldMatrix(true,true);root.traverse(o=>{o.matrixAutoUpdate=false;o.matrixWorldAutoUpdate=false;});
+const report=batchStaticCity(root),after=new THREE.Box3().setFromObject(root,true);
+assert.deepEqual(report,{before:4,after:1});assert.ok(before.min.distanceTo(after.min)<1e-5);assert.ok(before.max.distanceTo(after.max)<1e-5);assert.equal(transparent.parent,root);
+assert.equal(root.getObjectByName('CityBatch').geometry.index.count,144);
+console.log('Static city batching preserves transformed geometry, triangles and transparent objects.');
+const {simplifyMobileCity}=await import('../src/static-city.js');
+const mobileRoot=new THREE.Group(),wallMat=new THREE.MeshStandardMaterial({color:'#334455'});wallMat.name='City wall 1';
+const wallGeo=new THREE.BoxGeometry(10,40,15,8,8,8).translate(3,20,-4),wall=new THREE.Mesh(wallGeo,wallMat);wall.position.set(1000,0,0);mobileRoot.add(wall);
+const dark=new THREE.Mesh(new THREE.BoxGeometry(),new THREE.MeshStandardMaterial());dark.material.name='City dark windows';mobileRoot.add(dark);
+const lit=new THREE.Mesh(new THREE.BoxGeometry(),new THREE.MeshStandardMaterial());lit.material.name='City lit windows';mobileRoot.add(lit);
+const cabin=new THREE.Mesh(new THREE.SphereGeometry(),new THREE.MeshStandardMaterial());cabin.material.name='Passenger jacket';mobileRoot.add(cabin);const cabinGeo=cabin.geometry,cabinMat=cabin.material;
+const bounds=new THREE.Box3().setFromObject(wall,true),simple=simplifyMobileCity(mobileRoot),newBounds=new THREE.Box3().setFromObject(wall,true);
+assert.ok(simple.afterTriangles<simple.beforeTriangles);assert.equal(simple.buildings,1);assert.equal(dark.parent,null);assert.equal(lit.parent,null);assert.ok(bounds.min.distanceTo(newBounds.min)<1e-5&&bounds.max.distanceTo(newBounds.max)<1e-5);assert.equal(cabin.geometry,cabinGeo);assert.equal(cabin.material,cabinMat);assert.ok(wall.material.isMeshLambertMaterial);
+console.log('Mobile skyline simplification preserves building bounds and leaves non-city meshes untouched.');

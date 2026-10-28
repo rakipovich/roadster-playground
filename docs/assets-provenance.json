@@ -1,0 +1,176 @@
+[
+  {
+    "name": "Flying Roadster scene",
+    "author": "Apoorv Darshan",
+    "url": "https://github.com/apoorvdarshan/tesla-roadster-flying-car",
+    "license": "MIT",
+    "local_path": "assets/source/tesla-roadster-flying-car-main/roadster_flying_car.blend",
+    "changes": "Single forward ascent/main jump/rollout reuse ready samples once in increasing order; two-axis rotation retained. Initial1s ground acceleration and ramp wheel contact adapted.24s presentation, slow motion from2.4s takeoff through20.4s landing. No inverted hold, reverse run or second jump. Local unpublished refinement.",
+    "used_in": "output/roadster_ride.blend; output/ride.glb",
+    "checked_on": "2026-10-20",
+    "sha256": "6b0e6b0054f885c8ad94a6b106b913fbfd768e35267c62d043d404c9f36e90cb"
+  },
+  {
+    "name": "Tesla Roadster 2020",
+    "author": "metarex.4d",
+    "url": "https://sketchfab.com/3d-models/tesla-roadster-2020-1fbf29e297bd4a17ac39a00a378441d8",
+    "download_url": "https://github.com/stevenzhang070302/tesla-roadster-webgi/tree/main/assets",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "local_path": "assets/source/tesla-roadster-webgi-main/assets/tesla.glb",
+    "changes": "Retained cabin, inner roof, tyres and brakes. Original rounded exterior removed and replaced by authored photographic reconstruction. Existing cabin materials, scale and trim adapted. Not factory CAD.",
+    "used_in": "output/roadster_ride.blend; output/ride.glb",
+    "checked_on": "2026-10-20",
+    "sha256": "9ca3f8be562d47e08c80770f094a5dcf30b65c697951ddd60476dfb25588acc3"
+  },
+  {
+    "name": "Three.js",
+    "author": "Three.js authors",
+    "url": "https://github.com/mrdoob/three.js",
+    "license": "MIT",
+    "local_path": "web/node_modules/three",
+    "changes": "Standard GLTFLoader, AnimationMixer, HDRLoader, PMREMGenerator and OrbitControls reused with a small application layer.",
+    "used_in": "web",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "name": "Rigged Female Fashion Character in Ruffle Dress",
+    "author": "florah",
+    "url": "https://sketchfab.com/3d-models/rigged-female-fashion-character-in-ruffle-dress-8290d9dbb229407592e4a0209d4a3e12",
+    "license": "CC BY 4.0 (model page verified)",
+    "local_path": "assets/source/ruffle-dress/original.zip",
+    "changes": null,
+    "used_in": null,
+    "status": "Downloaded with user approval for isolated audit; rejected for main scene. No face/hair rig and seated skirt deforms poorly.",
+    "checked_on": "2026-10-18"
+  },
+  {
+    "name": "Tesla Roadster Simulator",
+    "author": "eduardmur",
+    "url": "https://github.com/eduardmur/tesla-roadster-simulator",
+    "license": "MIT code; see separate source licenses for content and excluded audio",
+    "local_path": "assets/source/tesla-roadster-simulator-main",
+    "changes": "Reference inspected only. No code, text or audio used in resulting experience.",
+    "used_in": null,
+    "checked_on": "2026-10-18"
+  },
+  {
+    "name": "Nova",
+    "author": "Massimo Javer",
+    "url": "https://sketchfab.com/3d-models/nova-game-ready-rigged-female-character-806ab694745a46d2b0810a4b267d95ce",
+    "license": "CC BY 4.0",
+    "local_path": null,
+    "status": "Downloaded for inspection before preview-first rule. Rejected by user on appearance; NEVER include in main scene. Rejected inspection cache removed for publication space on 2026-10-19; not used in scene.",
+    "used_in": null
+  },
+  {
+    "name": "Green Mini Dress",
+    "author": "kindman-boy",
+    "url": "https://sketchfab.com/3d-models/rigged-woman-in-green-mini-dress-full-body-3d-53c48f928f4b456b8f885333a5f0e669",
+    "license": "CC BY 4.0",
+    "local_path": null,
+    "status": "Inspection rejected: converted GLB has no armature/skins. Rejected inspection cache removed for publication space on 2026-10-19; not used in scene.",
+    "used_in": null
+  },
+  {
+    "name": "Hight Quality Realistic Girl Character",
+    "author": "hammer.gamedev",
+    "url": "https://sketchfab.com/3d-models/hight-quality-realistic-girl-character-a2fce1ee0c694542866724d6e47116ba",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "local_path": "assets/source/hq-realistic-girl/original.zip",
+    "sha256": "916f32b29c91dbc8d6b8c395997957e8f745716bb31ead7a590a6dee103218db",
+    "status": "User authorized continuing integration on 2026-10-18. Included in quality master and reduced web scene.",
+    "used_in": "output/roadster_ride.blend; output/roadster_web.blend; output/ride.glb; web/public/models/ride.glb",
+    "checked_on": "2026-10-20",
+    "changes": "User-requested approximately50% reduction of chest projection, blended consistently over body, top, jacket and all morph targets. Original source untouched. Source skeleton/face morphs retained. Seated torso turn24 degrees and forward placement corrected. Eight source-mask-weighted hair helpers; baked effective-gravity springs,4.4cm effective bounded belt slack; uniform88% pelvis-centred scale for cabin clearance; scalp/root pinning and limited hair travel, head/torso/leg reactions, bracing two-link arm targets, animated fingers/wrists/eyes/blinks/brows/mouth and breathing. Shoulder and lap webbing fitted to torso skin each physical frame through42 control bones with fixed chassis anchors. Web-only hair reduction/texture compression. Bounded visual approximation, not full cloth or validated occupant biomechanics. Arm IK uses actual joint-head distances rather than source display-bone lengths. Local seated bases, stable poles, damped bracing and quaternion hemisphere continuity; validated1321integer/half frames."
+  },
+  {
+    "name": "Kenney City Kit Commercial 2.1",
+    "author": "Kenney",
+    "url": "https://kenney.nl/assets/city-kit-commercial",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "local_path": "assets/source/environment/kenney_city-kit-commercial_2.1.zip",
+    "changes": "User approved preview/download on 2026-10-19. Used only for 28 distant buildings; material palette, window emission, dimensions and arrangement adapted.",
+    "used_in": "blender/roadster_environment.blend; output/roadster_ride.blend; output/environment.glb",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "name": "Qwantani Dusk 1 Pure Sky",
+    "author": "Greg Zaal / Jarod Guest / Poly Haven",
+    "url": "https://polyhaven.com/a/qwantani_dusk_1_puresky",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "local_path": "assets/source/environment/qwantani_dusk_1_puresky_2k.hdr",
+    "changes": "2K source HDR packed in Blender; reduced 1K browser HDR, prepared rotation and intensity.",
+    "used_in": "blender/roadster_environment.blend; output/roadster_ride.blend; output/environment.glb",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "name": "Asphalt 02",
+    "author": "Poly Haven",
+    "url": "https://polyhaven.com/a/asphalt_02",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "local_path": "assets/source/environment/asphalt_02_diff_2k.jpg",
+    "changes": "2K Diffuse, Roughness and NormalGL sources. 3 metre tiling; separate 1K textures for web environment.",
+    "used_in": "blender/roadster_environment.blend; output/roadster_ride.blend; output/environment.glb",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "name": "Remy",
+    "author": "Adobe Mixamo",
+    "url": "https://www.mixamo.com/",
+    "license": "Adobe Mixamo character usage terms; FAQ permits personal/commercial/nonprofit projects including games",
+    "license_url": "https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html",
+    "local_path": "assets/source/driver-remy/Remy.fbx",
+    "sha256": "d5907473f4b02bfac5470ec2a8c5727ed979ffacedaf576731a57cd0c2ab29d5",
+    "checked_on": "2026-10-20",
+    "used_in": "output/roadster_ride.blend; output/ride.glb",
+    "changes": "Explicitly approved user choice. Official FBX downloaded.67bones,42finger bones. Seated body, hands on yoke, curled fingers and bounded head/neck/eye reactions. Head hidden only in first-person camera. No ready facial morphs. Local refinement: actual leg joint-distance solve lifts feet above floor; wrists behind reference yoke grips so palms surround rim; seated head remains below actual roof. No new download. Local v3 driver body/head partition preserves complete boundary faces to close the collar seam; actual pose unchanged and shown with the source seat in a render-only inspection cutaway."
+  },
+  {
+    "name": "Authored wedge exterior",
+    "author": "Project-authored geometry",
+    "url": "https://www.caranddriver.com/photos/a74152579/tesla-roadster-revealed-exterior-gallery/",
+    "reference_credit": "Tesla studio photographs, published by Car and Driver",
+    "local_path": "scripts/build_reference_exterior.py",
+    "used_in": "output/roadster_ride.blend; output/ride.glb",
+    "changes": "Local v9: broader wedge nose, rearward-raked bumper returns, dark fascia, larger closed lamp lids and rising carbon sill boundary. Four hollow downward nozzle bells with mounting recesses and correctly aligned jet origins, outside the wheel wells. Actual eye-midpoint driver camera; clean windshield-following inner pillars replace jagged donor posts. Existing actor/prop/vehicle motion preserved; camera origin and master jet anchors/window updated explicitly. No downloads or publication. Approximate photographic geometry, not factory CAD.",
+    "checked_on": "2026-10-20"
+  },
+  {
+    "name": "Black Generic Smartphone",
+    "author": "Ottto3d",
+    "url": "https://sketchfab.com/3d-models/black-generic-smartphone-fd9e7fe5889f4c50ab326a962f48aefb",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "local_path": "assets/source/loose-items/phone.glb",
+    "changes": "User approved exact preview. Mesh normalized and placed in cabin; Blender Bullet world-gravity motion baked at 30fps. Coarse cabin/body contact approximation.",
+    "used_in": "output/roadster_ride.blend; output/roadster_web.blend; output/ride.glb",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "name": "Keys",
+    "author": "imparity",
+    "url": "https://sketchfab.com/3d-models/keys-aaccd2b9848d4e9d938cdc9d5293c7b3",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "local_path": "assets/source/loose-items/keys.glb",
+    "changes": "User approved exact preview. Mesh normalized and placed in cabin; Blender Bullet world-gravity motion baked at 30fps. Coarse cabin/body contact approximation.",
+    "used_in": "output/roadster_ride.blend; output/roadster_web.blend; output/ride.glb",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "name": "Coffee cup (GAMEREADY, FREE DL)",
+    "author": "Dokazvo",
+    "url": "https://sketchfab.com/3d-models/coffee-cup-gameready-free-dl-a178cea47a9c471e9a62b0ef6ba9f53c",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "local_path": "assets/source/loose-items/coffee.glb",
+    "changes": "User approved exact preview. Mesh normalized and placed in cabin; Blender Bullet world-gravity motion baked at 30fps. Coarse cabin/body contact approximation.",
+    "used_in": "output/roadster_ride.blend; output/roadster_web.blend; output/ride.glb",
+    "checked_on": "2026-10-19"
+  }
+]

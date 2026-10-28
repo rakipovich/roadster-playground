@@ -6,7 +6,7 @@ A browser-based driving experiment with ramps, wall rides, cold-gas thrusters an
 
 ## Source snapshot
 
-Download and unpack `roadster-source-snapshot.zip`. The web source is in `roadster-portfolio-draft/web/`, built with Three.js, Rapier and Vite. It includes touch controls, a stunt park, scoring and a cabin camera.
+The web source is in `web/`, built with Three.js, Rapier and Vite. It includes touch controls, a stunt park, scoring and a cabin camera.
 
 This snapshot excludes the 3D scene and music pending redistribution review. It is not a complete playable clone: separately licensed assets must be supplied and configured to match the referenced paths.
 
@@ -15,12 +15,12 @@ This snapshot excludes the 3D scene and music pending redistribution review. It 
 After supplying the runtime assets under `web/public/`, with a compatible recent Node.js version:
 
 ```sh
-cd roadster-portfolio-draft/web
+cd web
 npm ci
 npm run dev
 ```
 
-The snapshot has not yet been verified as a self-contained distribution. See `docs/assets-provenance.json` inside the archive for recorded sources and adaptations.
+The snapshot has not yet been verified as a self-contained distribution. See `docs/assets-provenance.json` for recorded sources and adaptations.
 
 ## Credits and reuse
 

@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {initPhysics,createDrivingWorld} from '../src/driving-physics.js';
+import {explorationTracker,BADGES} from '../src/exploration.js';
+await initPhysics();const sim=createDrivingWorld({spawn:{x:0,y:30,z:0}});let s;
+for(let i=0;i<330;i++)s=sim.step({freeRoam:true,boost:true});assert.ok(s.boostCooldown>7&&s.boostCooldown<8);assert.equal(s.boosting,false);
+const cooldown=s.boostCooldown;sim.reset(undefined,{preserveResources:true});s=sim.step({freeRoam:true,boost:true});assert.ok(s.boostCooldown<cooldown&&s.boostCooldown>7,'Reset cannot refill the tank');
+for(let i=0;i<1000;i++)s=sim.step({freeRoam:true,boost:true});assert.equal(s.boostCooldown,0);assert.equal(s.fuel,1);assert.equal(s.boosting,false,'Held button must not automatically relaunch');
+sim.step({freeRoam:true});s=sim.step({freeRoam:true,boost:true});assert.equal(s.boosting,true);
+for(let i=0;i<60;i++)s=sim.step({freeRoam:true,boost:true});s=sim.step({freeRoam:true});assert.equal(s.boostCooldown,8,'Partial use reloads after release');
+sim.reset({x:0,y:.05,z:0});for(let i=0;i<100;i++)s=sim.step({freeRoam:true,adhesion:true});assert.ok(s.gripFuel<1);s=sim.step({freeRoam:true});assert.equal(s.gripCooldown,10);for(let i=0;i<1250;i++)s=sim.step({freeRoam:true});assert.equal(s.gripFuel,1);assert.equal(s.gripLocked,false);sim.world.free();
+const tracker=explorationTracker();for(const b of BADGES){const p={x:b.p[0],y:b.p[1],z:b.p[2]};assert.equal(tracker.update(p).gained,1);assert.equal(tracker.update(p).gained,0);}assert.equal(tracker.update({x:0,y:0,z:0}).count,5);tracker.reset();assert.equal(tracker.update({x:0,y:0,z:0}).count,0);
+console.log('Free drive: finite burst, timed recharge, no held auto-boost, partial reload, grip reload, reset preservation and unique collectibles PASS');
